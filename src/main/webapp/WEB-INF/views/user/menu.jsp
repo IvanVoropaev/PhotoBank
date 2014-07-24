@@ -9,10 +9,10 @@
 </head>
 <body>
 	<p>Hello <security:authentication property="principal.username" />!</p>
-	<security:authorize access="hasRole('ROLE_ADMIN')">
+	<security:authorize access="hasRole('ADMIN')">
 		<p>You're so cute!</p>
 	</security:authorize>
-	<security:authorize access="hasRole('ROLE_USER')">
+	<security:authorize access="hasRole('USER')">
 		<p>You're a peace of shit!</p>
 	</security:authorize>
 	
