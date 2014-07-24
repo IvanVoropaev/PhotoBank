@@ -1,5 +1,6 @@
 package com.photo.bank.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -50,6 +51,21 @@ public class HibernatePhotoBankDAO implements PhotoBankDAO {
 					                        .setEntity("user", user)
 					                        .setEntity("album", album)
 					                        .list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Users getUser(String username) {
+		// TODO Auto-generated method stub
+		List<Users> userList = new ArrayList<Users>();
+		userList = sessionFactory.getCurrentSession()
+				                 .createQuery("from Users u where u.userName = :username")
+				                 .setParameter("username", username)
+				                 .list();
+		if (userList.size() > 0)
+			return userList.get(0);
+		else
+			return null;
 	}
 
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd"> 
        
 <tiles-definitions>
-	<definition name="baseTemplate" template="/WEB-INF/views/main_template.jsp">
+	<definition name="baseTemplate" template="/WEB-INF/views/main_template.jsp" >
 		<put-attribute name="title" value="" />
 		<put-attribute name="top" value="/WEB-INF/views/static/top.jsp" />
 		<put-attribute name="bottom" value="/WEB-INF/views/static/bottom.jsp" />
@@ -20,6 +20,20 @@
 		<put-attribute name="title" value="Content || Example" />
 		<put-attribute name="content" value="/WEB-INF/views/content.jsp" />
 		<put-attribute name="menu" value="/WEB-INF/views/user/menu.jsp" />
+	</definition>
+	
+	<definition name="registrationTemplate" template="/WEB-INF/views/reg_template.jsp" >
+		<put-attribute name="title" value="Register new user" />
+		<put-attribute name="top" value="/WEB-INF/views/static/top.jsp" />
+		<put-attribute name="bottom" value="/WEB-INF/views/static/bottom.jsp" />
+		<put-attribute name="register" value="/WEB-INF/views/register/registration.jsp" />
+	</definition>
+	
+	<definition name="registrationComplete" extends="registrationTemplate" >
+		<put-attribute name="title" value="Registration complete" />
+		<put-attribute name="top" value="/WEB-INF/views/static/top.jsp" />
+		<put-attribute name="bottom" value="/WEB-INF/views/static/bottom.jsp" />
+		<put-attribute name="register" value="/WEB-INF/views/register/registration_complete.jsp" />
 	</definition>
 	
 </tiles-definitions>

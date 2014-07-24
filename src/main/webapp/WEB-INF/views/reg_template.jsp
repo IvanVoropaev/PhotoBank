@@ -13,20 +13,17 @@
   <body>
     <table class="main">
       <tr class="main">
-        <td colspan="2" class="main">
+        <td class="main">
           <tiles:insertAttribute name="top"/>
         </td>
       </tr>
       <tr>
-        <td class="main"  width="20%">
-          <tiles:insertAttribute name="menu"/>
-        </td>
         <td class="main">
-          <tiles:insertAttribute name="content" />
+          <tiles:insertAttribute name="register"/>
         </td>
       </tr>
       <tr class="main">
-        <td colspan="2" class="main">
+        <td class="main">
           <tiles:insertAttribute name="bottom"/>
         </td>
       </tr>

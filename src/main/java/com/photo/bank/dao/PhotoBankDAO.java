@@ -13,5 +13,7 @@ public interface PhotoBankDAO {
 	
 	void findUser(Users user);
 	
+	Users getUser(String username);
+	
 	List<Photos> getPhotos(Users user, Albums album);
 }

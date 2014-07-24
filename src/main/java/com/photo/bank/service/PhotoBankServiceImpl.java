@@ -10,20 +10,18 @@ import com.photo.bank.entity.Users;
 @Service
 public class PhotoBankServiceImpl implements PhotoBankService {
 	
-	public PhotoBankServiceImpl() {
-		
-	}
-	
 	@Autowired
 	private PhotoBankDAO photoBankDAO;
-	
-	PhotoBankServiceImpl(PhotoBankDAO photoBankDAO) {
-		this.photoBankDAO = photoBankDAO;
-	}
 	
 	@Transactional
 	public void addUser(Users user) {
 		// TODO Auto-generated method stub
 		photoBankDAO.addUser(user);
+	}
+
+	@Transactional
+	public Users getUser(String username) {
+		// TODO Auto-generated method stub
+		return photoBankDAO.getUser(username);
 	}
 }

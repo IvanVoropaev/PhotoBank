@@ -19,7 +19,7 @@
     <input class="button" type="submit" value="Sign in">
     
   </form> 
-  <form action="registration.jsp">
+  <form action="register">
   	<input class="button" type="submit" value="Register">
   </form>
   

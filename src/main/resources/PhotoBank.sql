@@ -12,7 +12,7 @@
 -- TABLE: "Albums" 
 --
 
-CREATE TABLE "Albums"(
+CREATE TABLE Albums (
     album_id      int4        NOT NULL,
     user_id       int4        NOT NULL,
     album_name    char(30)    NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE "Albums"(
 -- TABLE: "Photos" 
 --
 
-CREATE TABLE "Photos"(
+CREATE TABLE Photos (
     photo_id    int4         NOT NULL,
     album_id    int4         NOT NULL,
     user_id     int4         NOT NULL,
@@ -41,9 +41,10 @@ CREATE TABLE "Photos"(
 -- TABLE: "Users" 
 --
 
-CREATE TABLE "Users"(
+CREATE TABLE Users (
     user_id      int4        NOT NULL,
     user_name    char(10)    NOT NULL,
+    user_email   char(40)    NOT NULL,
     password     char(10)    NOT NULL,
     user_role    char(10),
     CONSTRAINT "PK1" PRIMARY KEY (user_id)
@@ -56,21 +57,21 @@ CREATE TABLE "Users"(
 -- INDEX: "Ref11" 
 --
 
-CREATE INDEX "Ref11" ON "Albums"(user_id)
+CREATE INDEX "Ref11" ON Albums (user_id)
 ;
 -- 
 -- INDEX: "Ref22" 
 --
 
-CREATE INDEX "Ref22" ON "Photos"(album_id, user_id)
+CREATE INDEX "Ref22" ON Photos (album_id, user_id)
 ;
 -- 
 -- TABLE: "Albums" 
 --
 
-ALTER TABLE "Albums" ADD CONSTRAINT "RefUsers11" 
+ALTER TABLE Albums ADD CONSTRAINT "RefUsers11" 
     FOREIGN KEY (user_id)
-    REFERENCES "Users"(user_id) ON DELETE RESTRICT ON UPDATE RESTRICT
+    REFERENCES Users (user_id) ON DELETE RESTRICT ON UPDATE RESTRICT
 ;
 
 
@@ -78,9 +79,9 @@ ALTER TABLE "Albums" ADD CONSTRAINT "RefUsers11"
 -- TABLE: "Photos" 
 --
 
-ALTER TABLE "Photos" ADD CONSTRAINT "RefAlbums21" 
+ALTER TABLE Photos ADD CONSTRAINT "RefAlbums21" 
     FOREIGN KEY (album_id, user_id)
-    REFERENCES "Albums"(album_id, user_id) ON DELETE RESTRICT ON UPDATE RESTRICT
+    REFERENCES Albums (album_id, user_id) ON DELETE RESTRICT ON UPDATE RESTRICT
 ;
 
 
