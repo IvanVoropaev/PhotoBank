@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -40,9 +41,20 @@ public class MainController {
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String addNewUser(@Valid Users users, BindingResult bindingResult) {
+		
+		System.out.println(users);
 		if (bindingResult.hasErrors()) {
-			return "register";
+			System.out.println("Validate error");
+			return "registrationTemplate";
 		}
+		
+		if(!photoBankService.isUserNameAvalable(users.getUserName())) {
+			bindingResult.addError(new FieldError(bindingResult.getObjectName(), "username", "Specified username is already taken."));
+			System.out.println("Name already token");
+			return "registrationTemplate";
+		}
+		
+		System.out.println("Test2");
 		photoBankService.addUser(users);
 		return "registrationComplete";
 	}

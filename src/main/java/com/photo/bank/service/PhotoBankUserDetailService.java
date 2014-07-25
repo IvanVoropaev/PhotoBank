@@ -1,6 +1,7 @@
 package com.photo.bank.service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.transaction.Transactional;
@@ -15,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.photo.bank.dao.PhotoBankDAO;
+import com.photo.bank.entity.Roles;
 import com.photo.bank.entity.Users;
 
 public class PhotoBankUserDetailService implements UserDetailsService {
@@ -32,10 +34,12 @@ public class PhotoBankUserDetailService implements UserDetailsService {
 			throw new UsernameNotFoundException("user not found");
 		}
 		
-		System.out.println(userEntity.getUserName().trim() + " " + userEntity.getPassword().trim() + " " + userEntity.getUserEmail().trim() + " " + userEntity.getUserRole().trim());
+		List<Roles> rolesList = photoBankDAO.getRoles(userEntity);
 		
 		Set<GrantedAuthority> roles = new HashSet<GrantedAuthority>();
-		roles.add(new GrantedAuthorityImpl(userEntity.getUserRole().trim()));
+		for (Roles r : rolesList) {
+			roles.add(new GrantedAuthorityImpl(r.getRole().toString()));
+		}
 		
 		String name = userEntity.getUserName().trim();
 	    String password = userEntity.getPassword().trim();
@@ -55,5 +59,4 @@ public class PhotoBankUserDetailService implements UserDetailsService {
 		System.out.println(userDetails);
 		return userDetails;
 	}
-
 }

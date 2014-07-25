@@ -6,28 +6,27 @@
 			<table>
 				<tr>
 					<th><label for="user_name">User name:</label></th>
-					<td><sf:input path="userName" size="15" id="user_name"/></td>
+					<td>
+						<sf:input path="userName" size="15" id="user_name"/><br/>
+						<sf:errors path="userName" cssClass="error" />
+					</td>
 				</tr>
 				<tr>
 					<th><label for="user_password">Password:</label></th>
 					<td>
-						<sf:password path="password" size="30" showPassword="true" id="user_password"/> <!-- Поле пароля -->
+						<sf:password path="password" size="30" showPassword="true" id="user_password"/>
+						<sf:errors path="password" cssClass="error" /> <!-- Поле пароля -->
 						<small>6 characters or more (be tricky!)</small>
 					</td>
 				</tr>
 				<tr>
 					<th><label for="user_email">Email Address:</label></th>
 					<td>
-						<sf:input path="userEmail" size="30" id="user_email"/> <!-- Поле электронной почты -->
+						<sf:input path="userEmail" size="30" id="user_email"/>
+						<sf:errors path="userEmail" cssClass="error" /> <!-- Поле электронной почты -->
 						<small>In case you forget something</small>
 					</td>
-				</tr><tr>
-					<th><label for="user_role">User Role:</label></th>
-					<td>
-						<sf:input path="userRole" size="30" id="user_role"/>
-					</td>
-				</tr>
-				
+				</tr>			
 			</table>
 		</fieldset>
 		<input class="button" type="submit" value="Register">
