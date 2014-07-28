@@ -3,7 +3,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <div class="topbottom">
-	<s:url var="redUrl" value="/user" />
+	<s:url var="redUrl" value="/welcome" />
 	Registration successful complete!<br>
 	<a href="${redUrl}">Continue</a>
 </div>

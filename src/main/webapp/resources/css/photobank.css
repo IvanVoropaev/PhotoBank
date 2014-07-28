@@ -54,3 +54,8 @@ input {
     width: 70%;
     text-align: center;
 }
+
+.error {
+	color: red;
+	font-size: 12px;
+}

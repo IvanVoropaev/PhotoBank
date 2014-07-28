@@ -99,4 +99,5 @@ public class HibernatePhotoBankDAO implements PhotoBankDAO {
 		else
 			return true;
 	}
+
 }
