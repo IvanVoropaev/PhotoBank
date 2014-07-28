@@ -30,6 +30,8 @@ public class PhotoBankUserDetailService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException, DataAccessException {
 		
+		System.out.println(photoBankDAO);
+		
 		Users userEntity = photoBankDAO.getUser(username);
 		if (userEntity == null) {
 			System.out.println("Error");

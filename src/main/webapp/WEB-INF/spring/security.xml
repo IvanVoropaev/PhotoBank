@@ -17,9 +17,10 @@
 		<logout logout-url="/logout" />
 		<remember-me key="securityCheck" token-validity-seconds="86400"/>
 	</http>
-
-	<authentication-manager>  
+	
+	<authentication-manager alias="authMng">  
    		<authentication-provider user-service-ref="userDetailsService" /> 
    	</authentication-manager>  
+	
 		
 </beans:beans>

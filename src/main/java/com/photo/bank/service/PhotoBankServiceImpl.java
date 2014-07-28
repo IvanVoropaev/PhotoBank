@@ -30,4 +30,9 @@ public class PhotoBankServiceImpl implements PhotoBankService {
 		// TODO Auto-generated method stub
 		return photoBankDAO.isUserNameAvalable(username);
 	}
+	
+	@Transactional
+	public void loginUser(Users user) {
+		// TODO Auto-generated method stub
+	}
 }

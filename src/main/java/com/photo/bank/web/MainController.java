@@ -1,9 +1,15 @@
 package com.photo.bank.web;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.photo.bank.entity.Users;
 import com.photo.bank.service.PhotoBankService;
-import com.photo.bank.service.PhotoBankUserDetailService;
 
 @Controller
 public class MainController {
@@ -24,7 +29,8 @@ public class MainController {
 	private PhotoBankService photoBankService;
 	
 	@Autowired
-	private PhotoBankUserDetailService userDetailService;
+	@Qualifier("org.springframework.security.authenticationManager")
+	protected AuthenticationManager authenticationManager;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String main() {
@@ -48,36 +54,39 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ModelAndView addNewUser(@Valid Users users, BindingResult bindingResult) {
+	public ModelAndView addNewUser(@Valid Users users, BindingResult bindingResult, HttpServletRequest request) {
 		
 		ModelAndView model = new ModelAndView();
 		
 		System.out.println(users);
 		if (bindingResult.hasErrors()) {
-			System.out.println("Validate error");
 			model.setViewName("registrationTemplate");
 			return model;
 		}
 		
 		if(!photoBankService.isUserNameAvalable(users.getUserName())) {
 			bindingResult.addError(new FieldError(bindingResult.getObjectName(), "userName", "Specified username is already taken."));
-			System.out.println("Name already token");
 			model.setViewName("registrationTemplate");
 			return model;
 		}
 		
-		System.out.println("Test2");
 		photoBankService.addUser(users);
 		model.setViewName("registrationComplete");
 		model.addObject("bindingResult", bindingResult);
 		model.addObject("user", users);
 		
-		User user = (User) userDetailService.loadUserByUsername(users.getUserName());
-		userDetailService.authenticateUser(user);
+		// After successfully Creating user
+		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+		users.getUserName(), users.getPassword());
+		 
+		// generate session if one doesn't exist
+		request.getSession();
+		 
+		token.setDetails(new WebAuthenticationDetails(request));
+		Authentication authenticatedUser = authenticationManager.authenticate(token);
+		 
+		SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
 		
-		//Authentication authentication = new Authentication();
-		
-		//SecurityContextHolder.getContext().getAuthentication().
 		return model;
 	}
 	
