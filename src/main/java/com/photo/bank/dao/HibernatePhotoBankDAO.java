@@ -100,4 +100,16 @@ public class HibernatePhotoBankDAO implements PhotoBankDAO {
 			return true;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Albums> getAlbumsList(Users user) {
+		// TODO Auto-generated method stub
+		List<Albums> albumList = new ArrayList<Albums>();
+		albumList = sessionFactory.getCurrentSession()
+								  .createQuery("from Albums a where a.user = :user")
+								  .setParameter("user", user)
+								  .list();
+		return albumList;
+	}
+
 }

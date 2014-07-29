@@ -21,5 +21,7 @@ public interface PhotoBankDAO {
 	
 	List<Roles> getRoles(Users user);
 	
+	List<Albums> getAlbumsList(Users user);
+	
 	boolean isUserNameAvalable(String username);
 }

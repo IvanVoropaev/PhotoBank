@@ -22,6 +22,9 @@
 		<put-attribute name="menu" value="/WEB-INF/views/user/menu.jsp" />
 	</definition>
 	
+	
+	<!-- Regestration -->
+	
 	<definition name="registrationTemplate" template="/WEB-INF/views/reg_template.jsp" >
 		<put-attribute name="title" value="Register new user" />
 		<put-attribute name="top" value="/WEB-INF/views/static/top.jsp" />
@@ -31,9 +34,19 @@
 	
 	<definition name="registrationComplete" extends="registrationTemplate" >
 		<put-attribute name="title" value="Registration complete" />
-		<put-attribute name="top" value="/WEB-INF/views/static/top.jsp" />
-		<put-attribute name="bottom" value="/WEB-INF/views/static/bottom.jsp" />
 		<put-attribute name="register" value="/WEB-INF/views/register/registration_complete.jsp" />
+	</definition>
+	
+	<!-- Albums -->
+	<definition name="addAlbumTemplate" extends="registrationTemplate" >
+		<put-attribute name="title" value="Add new album" />
+		<put-attribute name="register" value="/WEB-INF/views/albums/add_new_album.jsp" />
+	</definition>
+	
+	<definition name="showAlbumTemplate" extends="baseTemplate" >
+		<put-attribute name="title" value="Albums" />
+		<put-attribute name="menu" value="/WEB-INF/views/user/menu.jsp" />
+		<put-attribute name="content" value="/WEB-INF/views/albums/all_albums.jsp" />
 	</definition>
 	
 </tiles-definitions>
