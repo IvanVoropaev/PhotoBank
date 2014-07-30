@@ -27,6 +27,7 @@ public class Albums {
 	private Users user;
 	
 	@Column(name="album_name")
+	//@Size(min=3, max=20, message="Album name must be between 3 and 20 characters long.")
 	private String albumName;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy="album")

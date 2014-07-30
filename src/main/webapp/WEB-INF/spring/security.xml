@@ -9,7 +9,6 @@
 	<beans:bean class="com.photo.bank.service.PhotoBankUserDetailService" id="userDetailsService"/>
 	
 	<http auto-config="true" use-expressions="true">
-		<intercept-url pattern="/user/**" access="hasRole('USER')" />
 		<form-login login-processing-url="/security_check"
 					login-page="/main_template"
 		            default-target-url="/welcome"

@@ -13,11 +13,13 @@
   </head>
   
   <body>
-  	<sec:authorize access="isAuthenticated()">
-    	Your name is: <sec:authentication property="principal.username" /><br>
-    	<a href="<c:url value="/logout" />">Logout</a>
-    </sec:authorize>
+  	
     <table class="main">
+      <tr>
+        <td class="noborder">
+          <tiles:insertAttribute name="isauthenticated" />
+        </td>
+      </tr>
       <tr class="main">
         <td colspan="2" class="main">
           <tiles:insertAttribute name="top"/>

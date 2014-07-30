@@ -20,7 +20,6 @@ public class HibernatePhotoBankDAO implements PhotoBankDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	@Override
 	public void addUser(Users user) {
 		// TODO Auto-generated method stub
 		sessionFactory.getCurrentSession().save(user);
@@ -30,39 +29,33 @@ public class HibernatePhotoBankDAO implements PhotoBankDAO {
 		addRoles(role);
 	}
 
-	@Override
 	public void addAlbum(Albums album) {
-		// TODO Auto-generated method stub
+		
 		sessionFactory.getCurrentSession().save(album);
 	}
 
-	@Override
 	public void addPhoto(Photos photo) {
-		// TODO Auto-generated method stub
+		
 		sessionFactory.getCurrentSession().save(photo);
 	}
 
-	@Override
 	public void findUser(Users user) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
-	public List<Photos> getPhotos(Users user, Albums album) {
-		// TODO Auto-generated method stub
+	public List<Photos> getPhotosList(Albums album) {
+		
 		return (List<Photos>) sessionFactory.getCurrentSession()
-					                        .createQuery("from Photos photo where photo.user = :user and photo.album = :album")
-					                        .setEntity("user", user)
-					                        .setEntity("album", album)
+					                        .createQuery("from Photos photo where photo.album = :album")
+					                        .setParameter("album", album)
 					                        .list();
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
 	public Users getUser(String username) {
-		// TODO Auto-generated method stub
+		
 		List<Users> userList = new ArrayList<Users>();
 		userList = sessionFactory.getCurrentSession()
 				                 .createQuery("from Users u where u.userName = :username")
@@ -75,9 +68,8 @@ public class HibernatePhotoBankDAO implements PhotoBankDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
 	public List<Roles> getRoles(Users user) {
-		// TODO Auto-generated method stub
+		
 		List<Roles> roleList = new ArrayList<Roles>();
 		roleList = sessionFactory.getCurrentSession()
 								 .createQuery("from Roles r where r.user = :user")
@@ -86,13 +78,11 @@ public class HibernatePhotoBankDAO implements PhotoBankDAO {
 		return roleList;
 	}
 
-	@Override
 	public void addRoles(Roles role) {
-		// TODO Auto-generated method stub
+		
 		sessionFactory.getCurrentSession().save(role);
 	}
 	
-	@Override
 	public boolean isUserNameAvalable(String username) {	
 		if(getUser(username) != null)
 			return false;
@@ -101,15 +91,25 @@ public class HibernatePhotoBankDAO implements PhotoBankDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
 	public List<Albums> getAlbumsList(Users user) {
-		// TODO Auto-generated method stub
+		
 		List<Albums> albumList = new ArrayList<Albums>();
 		albumList = sessionFactory.getCurrentSession()
 								  .createQuery("from Albums a where a.user = :user")
 								  .setParameter("user", user)
 								  .list();
 		return albumList;
+	}
+
+	public boolean isAlbumNameAvalable(String username, String albumname) {
+		Users user = getUser(username);
+		List<Albums> albumList = getAlbumsList(user);
+		boolean avalable = true;
+		for(Albums album : albumList) {
+			if (album.getAlbumName().equals(albumname))
+				avalable = false;
+		}
+		return avalable;
 	}
 
 }

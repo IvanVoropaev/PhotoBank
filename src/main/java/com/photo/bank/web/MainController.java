@@ -1,5 +1,7 @@
 package com.photo.bank.web;
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -33,14 +35,15 @@ public class MainController {
 	protected AuthenticationManager authenticationManager;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String main() {
-		return "anonimTemplate";
+	public String main(Principal principal) {
+		if (principal == null)
+			return "anonimTemplate";
+		else 
+			return "userTemplate";
 	}
 	
 	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
 	public ModelAndView welcome() {
-		//User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		//System.out.println(user);
 		ModelAndView model = new ModelAndView();
 		model.setViewName("userTemplate");
 		return model;
@@ -48,7 +51,6 @@ public class MainController {
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String registerNewUser(Model model) {
-		System.out.println("Test");
 		model.addAttribute(new Users());
 		return "registrationTemplate";
 	}
@@ -58,7 +60,6 @@ public class MainController {
 		
 		ModelAndView model = new ModelAndView();
 		
-		System.out.println(users);
 		if (bindingResult.hasErrors()) {
 			model.setViewName("registrationTemplate");
 			return model;

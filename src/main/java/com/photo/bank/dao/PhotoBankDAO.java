@@ -17,11 +17,13 @@ public interface PhotoBankDAO {
 	
 	Users getUser(String username);
 	
-	List<Photos> getPhotos(Users user, Albums album);
+	List<Photos> getPhotosList(Albums album);
 	
 	List<Roles> getRoles(Users user);
 	
 	List<Albums> getAlbumsList(Users user);
 	
 	boolean isUserNameAvalable(String username);
+	
+	boolean isAlbumNameAvalable(String username, String albumname);
 }

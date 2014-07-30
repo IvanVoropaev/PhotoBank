@@ -4,6 +4,7 @@
 <tiles-definitions>
 	<definition name="baseTemplate" template="/WEB-INF/views/main_template.jsp" >
 		<put-attribute name="title" value="" />
+		<put-attribute name="isauthenticated" value="/WEB-INF/views/static/isauthenticated.jsp" />
 		<put-attribute name="top" value="/WEB-INF/views/static/top.jsp" />
 		<put-attribute name="bottom" value="/WEB-INF/views/static/bottom.jsp" />
 		<put-attribute name="menu" value="" />
@@ -27,6 +28,7 @@
 	
 	<definition name="registrationTemplate" template="/WEB-INF/views/reg_template.jsp" >
 		<put-attribute name="title" value="Register new user" />
+		<put-attribute name="isauthenticated" value="/WEB-INF/views/static/isauthenticated.jsp" />
 		<put-attribute name="top" value="/WEB-INF/views/static/top.jsp" />
 		<put-attribute name="bottom" value="/WEB-INF/views/static/bottom.jsp" />
 		<put-attribute name="register" value="/WEB-INF/views/register/registration.jsp" />
@@ -47,6 +49,12 @@
 		<put-attribute name="title" value="Albums" />
 		<put-attribute name="menu" value="/WEB-INF/views/user/menu.jsp" />
 		<put-attribute name="content" value="/WEB-INF/views/albums/all_albums.jsp" />
+	</definition>
+	
+	<definition name="showPhotoAlbumTemplate" extends="baseTemplate" >
+		<put-attribute name="title" value="Albums" />
+		<put-attribute name="menu" value="/WEB-INF/views/albums/all_albums.jsp" />
+		<put-attribute name="content" value="/WEB-INF/views/albums/album.jsp" />
 	</definition>
 	
 </tiles-definitions>
